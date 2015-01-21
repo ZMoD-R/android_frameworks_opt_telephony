@@ -1283,11 +1283,16 @@ public final class RIL extends BaseCommands implements CommandsInterface {
         send(rr);
     }
 
+ /**
+     * The RIL can't handle the RIL_REQUEST_SEND_SMS_EXPECT_MORE
+     * request properly, so we use RIL_REQUEST_SEND_SMS instead.
+     */
+
     @Override
     public void
     sendSMSExpectMore (String smscPDU, String pdu, Message result) {
         RILRequest rr
-                = RILRequest.obtain(RIL_REQUEST_SEND_SMS_EXPECT_MORE, result);
+                = RILRequest.obtain(RIL_REQUEST_SEND_SMS, result);
 
         constructGsmSendSmsRilRequest(rr, smscPDU, pdu);
 
